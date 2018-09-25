@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSV to JSON</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <h2>CSV to JSON</h2>
+      <p>A rudimentary CSV to JSON converter. Checks for "TRUE" and "FALSE" values.</p>
+      <form name="csvform">
+        <textarea placeholder="Paste CSV here" name="csvinput" cols="30" rows="10"></textarea>
+      </form>
+      <div class="status">
+        <div class="status-text"></div>
+      </div>
+      <textarea placeholder="JSON output" class="output"></textarea>
+      <button class="copy">Copy to clipboard</button>
+      <div class="copy-status">
+        <div class="copy-status-text"></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="content">
+      Jefferson Lam • <a href="https://github.com/jeffersonlam">github</a>
+    </div>
+  </footer>
+  <script src="./index.js"></script>
+</body>
+</html>
