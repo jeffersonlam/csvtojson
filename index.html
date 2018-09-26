@@ -14,21 +14,23 @@
       <p>A rudimentary CSV to JSON converter. Checks for "TRUE", "FALSE", and "null" values.</p>
       <div class="row">
         <div class="column">
-          <form name="csvform">
-            <textarea class="csvinput" placeholder="Paste CSV or choose a file" name="csvinput"></textarea>
-            <input name="fileinput" type="file" id="file">
+          <textarea data-key="csvinput" class="csvinput" placeholder="Paste CSV or choose a file" name="csvinput"></textarea>
+          <div class="textarea-actions">
+            <input data-key="fileinput" name="fileinput" type="file" id="file">
             <label for="file" class="btn">Choose a file</label>
             <div class="filename">No file selected</div>
-          </form>
+          </div>
         </div>
         <div class="column status">
           <div class="status-text">➜</div>
         </div>
         <div class="column">
           <textarea placeholder="JSON output" class="output"></textarea>
-          <button class="copy btn">Copy to clipboard</button>
-          <div class="copy-status">
-            <div class="copy-status-text"></div>
+          <div class="textarea-actions">
+            <button class="copy btn">Copy to clipboard</button>
+            <div class="copy-status">
+              <div class="copy-status-text"></div>
+            </div>
           </div>
         </div>
       </div>
