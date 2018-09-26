@@ -9,7 +9,7 @@ html {
 
 body {
   font-family: sans-serif;
-  font-size: 1.2em;
+  font-size: 1.25em;
   margin: 0;
   height: 100%;
   display: flex;
@@ -21,65 +21,94 @@ body {
 .content {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 10px 8% 20px;
+  padding: 10px 10px 20px;
 }
 
 .container {
   flex: 1 0 auto;
 }
 
+.row {
+  margin-top: 50px;
+  display: flex;
+}
+
+.column {
+  flex: 5;
+}
+
+form {
+  position: relative;
+}
+
+input[type='file'] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+input[type='file'] + label {
+  display: inline-block;
+  background-color: #f374ae;
+  border-bottom: 1px solid #f374ae;
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  margin-top: 10px;
+}
+
+input[type='file'] + label:hover {
+  cursor: pointer;
+}
+
+input[type='file'] + label:active {
+  border-bottom: 0;
+  margin-top: 11px;
+}
+
+.filename {
+  margin-top: 10px;
+}
+
 textarea {
+  font-size: 0.85em;
   width: 100%;
-  height: 8em;
+  height: 15em;
   font-family: 'Courier New', Courier, monospace;
   background-color: #fff;
 }
 
-textarea, button {
-  font-size: 1.2em;
-}
-
 .status {
-  margin-top: 25px;
-  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 80px;
+  flex: 1;
 }
 
 .status-text {
+  font-size: 2em;
+  transform-origin: left;
   opacity: 1;
-  transition: opacity .3s linear;
+  transition: opacity 0.3s linear;
 }
 
 .output {
-  font-size: 1.2em;
-  margin-top: 10px;
   border: 1px solid #888;
   overflow: auto;
-  height: 15em;
-  min-height: 100px;
-}
-
-button {
-  margin-top: 10px;
-  background-color: #F374AE;
-  padding: 10px 15px;
-  border: 0;
-  text-transform: uppercase;
-  color: #fff;
-  font-weight: 700;
-  border-bottom: 1px solid #F374AE;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-button:active {
-  margin-top: 11px;
-  border-bottom: 0;
 }
 
 .copy-status {
   margin-top: 10px;
+}
+
+.copy-status-text {
+  transform-origin: left;
 }
 
 footer {
@@ -94,20 +123,41 @@ footer a {
 }
 
 .pop {
-  animation: pop .3s;
-  transform-origin: left;
+  animation: pop 0.5s;
 }
 
 @keyframes pop {
-  0%, 100% {
+  0%,
+  100% {
     transform: none;
   }
 
   50% {
-    transform: scale(1.07);
+    transform: scale3d(1.1, 1.1, 1.1);
   }
 }
 
 .fade-out {
   opacity: 0;
+}
+
+.btn {
+  font-size: 1em;
+  margin-top: 10px;
+  background-color: #f374ae;
+  padding: 10px 15px;
+  border: 0;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  border-bottom: 1px solid #f374ae;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  margin-top: 11px;
+  border-bottom: 0;
 }

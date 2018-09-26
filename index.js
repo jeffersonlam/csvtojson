@@ -1,36 +1,77 @@
 {
+  const canUploadFile =
+    window.File && window.FileReader && window.FileList && window.Blob;
   const csvInput = document.csvform.csvinput;
+  const fileInput = document.csvform.fileinput;
+  const fileName = document.querySelector('.filename');
   const jsonOutput = document.querySelector('.output');
-  const copy = document.querySelector('.copy');
+  const copyBtn = document.querySelector('.copy');
   let jsonStatus = document.querySelector('.status-text');
   let copyStatus = document.querySelector('.copy-status-text');
   let debounce = null;
 
-  csvInput.addEventListener('keyup', function(e) {
+  if (!canUploadFile) {
+    fileInput.style.display = 'none';
+  }
+
+  function handleCsvInput() {
     clearTimeout(debounce);
     debounce = setTimeout(() => {
       const json = csvToJson(this.value);
       displayJson(json);
-      jsonStatus = updateStatus(jsonStatus, 'JSON\'d');
+      jsonStatus = updateStatus(jsonStatus, "➜");
     }, 100);
-  });
+  }
 
-  copy.addEventListener('click', function(e) {
+  function handleFileInput() {
+    const file = this.files[0];
+    fileInput.value = "";
+    fileName.textContent = file.name;
+    if (file) {
+      if (file.name.slice(-3) != 'csv') {
+        fileName.textContent = "Please select a csv file";
+        return;
+      }
+      const fileReader = new FileReader();
+
+      fileReader.onload = e => {
+        console.log(e);
+        csvInput.value = e.target.result;
+        csvInput.dispatchEvent(new Event('onchange'));
+      };
+
+      fileReader.onerror = e => {
+        console.error('Failed to read file', e);
+        jsonStatus = updateStatus(jsonStatus, "Failed to read file");
+      };
+
+      fileReader.readAsText(file);
+    } else {
+      console.error('Failed to read file');
+      jsonStatus = updateStatus(jsonStatus, "Failed to read file");
+    }
+  }
+
+  csvInput.addEventListener('keyup', handleCsvInput);
+  csvInput.addEventListener('onchange', handleCsvInput);
+  fileInput.addEventListener('change', handleFileInput);
+  fileInput.addEventListener('onselect', handleFileInput);
+
+  copyBtn.addEventListener('click', function(e) {
     jsonOutput.select();
     document.execCommand('copy');
     this.focus();
 
-    copyStatus = updateStatus(copyStatus, 'Copy\'d');
+    copyStatus = updateStatus(copyStatus, "Copy'd");
   });
 
   function updateStatus(element, text) {
     const newStatus = element.cloneNode();
-    newStatus.className = "status-text pop";
+    element.classList.remove('pop');
+    const className = element.className;
+    newStatus.className = `${className} pop`;
     newStatus.textContent = text;
     element.parentNode.replaceChild(newStatus, element);
-    setTimeout(() => {
-      newStatus.classList.add('fade-out');
-    }, 3000);
     return newStatus;
   }
 
