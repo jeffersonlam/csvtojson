@@ -16,30 +16,45 @@
     fileInput.style.display = 'none';
   }
 
+  csvInput.addEventListener('keyup', handleCsvInput);
+  csvInput.addEventListener('onchange', handleCsvInput);
+  jsonOutput.addEventListener('onchange', handleJsonOutput);
+  jsonOutput.addEventListener('keyup', handleJsonOutput);
+  fileInput.addEventListener('change', handleFileInput);
+  fileInput.addEventListener('onselect', handleFileInput);
+  copyBtn.addEventListener('click', handleCopy);
+
   function handleCsvInput() {
     clearTimeout(debounce);
     debounce = setTimeout(() => {
       const json = csvToJson(this.value);
       displayJson(json);
       jsonStatus = updateStatus(jsonStatus, "➜");
+      jsonOutput.dispatchEvent(new Event('onchange'));
     }, 100);
+  }
+
+  function handleJsonOutput() {
+    console.log(this.value);
+    if (this.value.length > 0) copyBtn.disabled = false;
+    else copyBtn.disabled = true;
   }
 
   function handleFileInput() {
     const file = this.files[0];
-    fileInput.value = "";
-    fileName.textContent = file.name;
+    this.value = "";
     if (file) {
       if (file.name.slice(-3) != 'csv') {
         fileName.textContent = "Please select a csv file";
         return;
       }
+      fileName.textContent = file.name;
       const fileReader = new FileReader();
 
       fileReader.onload = e => {
-        console.log(e);
         csvInput.value = e.target.result;
         csvInput.dispatchEvent(new Event('onchange'));
+        jsonOutput.dispatchEvent(new Event('onchange'));
       };
 
       fileReader.onerror = e => {
@@ -53,19 +68,6 @@
       jsonStatus = updateStatus(jsonStatus, "Failed to read file");
     }
   }
-
-  csvInput.addEventListener('keyup', handleCsvInput);
-  csvInput.addEventListener('onchange', handleCsvInput);
-  fileInput.addEventListener('change', handleFileInput);
-  fileInput.addEventListener('onselect', handleFileInput);
-
-  copyBtn.addEventListener('click', function(e) {
-    jsonOutput.select();
-    document.execCommand('copy');
-    this.focus();
-
-    copyStatus = updateStatus(copyStatus, "Copy'd");
-  });
 
   function updateStatus(element, text) {
     const newStatus = element.cloneNode();
@@ -85,11 +87,9 @@
     const rows = csv.split(/\n/);
     const keys = rows.shift().split(',');
     const dataRows = rows.map(row => row.split(','));
-
     const jsonArray = [];
     dataRows.forEach(row => {
       const obj = {};
-
       row.forEach((cell, i) => {
         if (cell.match(/true/i) && cell.toLowerCase() === "true") {
           obj[keys[i]] = true;
@@ -101,12 +101,17 @@
           obj[keys[i]] = cell;
         }
       });
-
       // check incomplete row or newline at end of csv file
       if (Object.keys(obj).length != keys.length) return;
       jsonArray.push(obj);
     });
-
     return jsonArray;
+  }
+
+  function handleCopy(e) {
+    jsonOutput.select();
+    document.execCommand('copy');
+    this.focus();
+    copyStatus = updateStatus(copyStatus, "Copy'd");
   }
 }

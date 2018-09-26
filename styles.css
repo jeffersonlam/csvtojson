@@ -157,3 +157,12 @@ footer a {
   margin-top: 11px;
   border-bottom: 0;
 }
+
+.btn:disabled {
+  background-color: #999;
+  border-color: #999;
+}
+
+.btn:disabled:hover {
+  cursor: default
+}
