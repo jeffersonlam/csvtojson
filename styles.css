@@ -84,8 +84,8 @@ textarea {
 }
 
 .status-text {
-  font-size: 2em;
-  transform-origin: left;
+  font-size: 2.5em;
+  position: absolute;
   opacity: 1;
   transition: opacity 0.3s linear;
 }
@@ -100,7 +100,7 @@ textarea {
 }
 
 .copy-status-text {
-  transform-origin: left;
+  position: absolute;
 }
 
 footer {
