@@ -24,6 +24,8 @@
   fileInput.addEventListener('onselect', handleFileInput);
   copyBtn.addEventListener('click', handleCopy);
 
+  csvInput.dispatchEvent(new Event('onchange'));
+
   function handleCsvInput() {
     clearTimeout(debounce);
     debounce = setTimeout(() => {
