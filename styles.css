@@ -68,6 +68,12 @@ input[type='file'] + label:active {
   margin-top: 11px;
 }
 
+input[type='file']:focus + label {
+  /* Restore browser's default outline for label disguised as button */
+  outline: 1px dotted #212121;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
 .filename {
   margin-top: 10px;
 }
