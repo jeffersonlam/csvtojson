@@ -52,14 +52,6 @@ input[type='file'] {
 
 input[type='file'] + label {
   display: inline-block;
-  background-color: #f374ae;
-  border-bottom: 1px solid #f374ae;
-  color: white;
-  font-size: 1em;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 10px 15px;
-  margin-top: 10px;
 }
 
 input[type='file'] + label:hover {
