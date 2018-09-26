@@ -1,8 +1,10 @@
 {
-  const canUploadFile =
-    window.File && window.FileReader && window.FileList && window.Blob;
-  const csvInput = document.csvform.csvinput;
-  const fileInput = document.csvform.fileinput;
+  const canUploadFile = window.File &&
+                        window.FileReader &&
+                        window.FileList &&
+                        window.Blob;
+  const csvInput = document.querySelector('[data-key=csvinput]');
+  const fileInput = document.querySelector('[data-key=fileinput]');
   const fileName = document.querySelector('.filename');
   const jsonOutput = document.querySelector('.output');
   const copyBtn = document.querySelector('.copy');
@@ -89,10 +91,12 @@
       const obj = {};
 
       row.forEach((cell, i) => {
-        if (cell === 'TRUE') {
+        if (cell.match(/true/i) && cell.toLowerCase() === "true") {
           obj[keys[i]] = true;
-        } else if (cell === 'FALSE') {
+        } else if (cell.match(/false/i) && cell.toLowerCase() === "false") {
           obj[keys[i]] = false;
+        } else if (cell.match(/null/i) && cell.toLowerCase() === "null") {
+          obj[keys[i]] = null;
         } else {
           obj[keys[i]] = cell;
         }
