@@ -4,29 +4,34 @@
 
 html {
   height: 100%;
+
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   font-family: sans-serif;
   font-size: 1.25em;
-  margin: 0;
-  height: 100%;
+
   display: flex;
   flex-direction: column;
-  background-color: #fdfdfd;
+
+  height: 100%;
+  margin: 0;
+
   color: #333;
+  background-color: #fdfdfd;
 }
 
 .container {
-  flex: 1 0 auto;
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
 }
 
 .content {
-  padding: 10px 10% 20px;
   flex: 1;
+
+  padding: 10px 10% 20px;
 }
 
 .container .content {
@@ -39,24 +44,28 @@ body {
 }
 
 .row {
-  margin-top: 50px;
   display: flex;
   flex: 1;
+
+  margin-top: 50px;
 }
 
 .column {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
 input[type='file'] {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
   position: absolute;
   z-index: -1;
+
+  overflow: hidden;
+
+  width: .1px;
+  height: .1px;
+
+  opacity: 0;
 }
 
 input[type='file'] + label {
@@ -68,8 +77,9 @@ input[type='file'] + label:hover {
 }
 
 input[type='file'] + label:active {
-  border-bottom: 0;
   margin-top: 11px;
+
+  border-bottom: 0;
 }
 
 input[type='file']:focus + label {
@@ -87,20 +97,24 @@ input[type='file']:focus + label {
 }
 
 .dropzone::after {
-  content: 'Drop file here';
   font-size: 1.25em;
   font-weight: 600;
+
   position: absolute;
   top: 0;
   right: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  content: 'Drop file here';
+  transition: all .1s;
   pointer-events: none;
+
   opacity: 0;
-  transition: all 0.1s;
 }
 
 .dropzone.active::after {
@@ -108,20 +122,23 @@ input[type='file']:focus + label {
 }
 
 .dropzone.active textarea {
-  outline: 5px dashed hotpink;
-  border: 1px solid transparent;
-  background-color: rgba(254, 107, 180, 0.1);
   color: transparent;
+  border: 1px solid transparent;
+  outline: 5px dashed hotpink;
+  background-color: rgba(254, 107, 180, .1);
 }
 
 textarea {
-  transition: 0.1s all;
-  outline: 1px solid transparent;
-  border: 1px solid #888;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 1em;
+
   width: 100%;
   min-height: 10em;
-  font-family: 'Courier New', Courier, monospace;
+
+  transition: .1s all;
+
+  border: 1px solid #888;
+  outline: 1px solid transparent;
   background-color: #fff;
 }
 
@@ -140,16 +157,20 @@ textarea {
 
 .status {
   flex: 0 0 0;
+
   padding: 0 2%;
 }
 
 .status-text {
   font-size: 2.5em;
-  opacity: 1;
-  transition: opacity 0.3s linear;
-  flex: 3;
+
   display: flex;
   align-items: center;
+  flex: 3;
+
+  transition: opacity .3s linear;
+
+  opacity: 1;
 }
 
 .copy-status {
@@ -161,10 +182,12 @@ textarea {
 }
 
 footer {
-  padding-top: 5px;
   flex-shrink: 0;
-  background-color: #444;
+
+  padding-top: 5px;
+
   color: #fdfdfd;
+  background-color: #444;
 }
 
 footer a {
@@ -172,7 +195,7 @@ footer a {
 }
 
 .pop {
-  animation: pop 0.5s;
+  animation: pop .5s;
 }
 
 @keyframes pop {
@@ -191,15 +214,18 @@ footer a {
 }
 
 .btn {
-  background-color: hotpink;
-  border: 0;
-  border-bottom: 1px solid hotpink;
-  color: #fff;
-  margin-top: 10px;
-  padding: 10px 15px;
-  text-transform: uppercase;
   font-size: 1em;
   font-weight: 700;
+
+  margin-top: 10px;
+  padding: 10px 15px;
+
+  text-transform: uppercase;
+
+  color: #fff;
+  border: 0;
+  border-bottom: 1px solid hotpink;
+  background-color: hotpink;
 }
 
 .btn:hover {
@@ -208,12 +234,13 @@ footer a {
 
 .btn:active {
   margin-top: 11px;
+
   border-bottom: 0;
 }
 
 .btn:disabled {
-  background-color: #999;
   border-color: #999;
+  background-color: #999;
 }
 
 .btn:disabled:hover {
