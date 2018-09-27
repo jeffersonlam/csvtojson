@@ -120,7 +120,7 @@ textarea {
   transition: .1s all;
   outline: 1px solid transparent;
   border: 1px solid #888;
-  font-size: 0.85em;
+  font-size: 1em;
   width: 100%;
   min-height: 10em;
   font-family: 'Courier New', Courier, monospace;
