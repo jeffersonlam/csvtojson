@@ -8,6 +8,7 @@
   const jsonOutput = document.querySelector('.output');
   const copyBtn = document.querySelector('.copy');
   const dropZone = document.querySelector('.dropzone');
+  const container = document.querySelector('.container');
   let fileStatus = document.querySelector('.file-status-text');
   let jsonStatus = document.querySelector('.status-text');
   let copyStatus = document.querySelector('.copy-status-text');
@@ -25,12 +26,12 @@
   fileInput.addEventListener('onselect', handleFileInput);
   copyBtn.addEventListener('click', handleCopy);
 
-  dropZone.dragEnteredEls = [];
-  dropZone.addEventListener('dragenter', function(e) {
+  container.dragEnteredEls = [];
+  container.addEventListener('dragenter', function(e) {
     this.dragEnteredEls.push(e.target);
     dropZone.classList.add('active');
   });
-  dropZone.addEventListener('dragleave', function(e) {
+  container.addEventListener('dragleave', function(e) {
     this.dragEnteredEls = this.dragEnteredEls.filter(el => {
       return el != e.target
     });
@@ -38,7 +39,7 @@
       dropZone.classList.remove('active');
     }
   });
-  dropZone.addEventListener('drop', function(e) {
+  container.addEventListener('drop', function(e) {
     dropZone.classList.remove('active');
     e.preventDefault();
     e.stopPropagation();
