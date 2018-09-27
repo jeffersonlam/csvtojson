@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  transition: all .2s;
 }
 
 html {
@@ -83,7 +82,6 @@ input[type='file']:focus + label {
   margin-top: 10px;
 }
 
-
 .dropzone {
   position: relative;
 }
@@ -102,7 +100,7 @@ input[type='file']:focus + label {
   align-items: center;
   pointer-events: none;
   opacity: 0;
-  transition: all .1s;
+  transition: all 0.1s;
 }
 
 .dropzone.active::after {
@@ -112,12 +110,12 @@ input[type='file']:focus + label {
 .dropzone.active textarea {
   outline: 5px dashed hotpink;
   border: 1px solid transparent;
-  background-color: rgba(254, 107, 180, .1);
+  background-color: rgba(254, 107, 180, 0.1);
   color: transparent;
 }
 
 textarea {
-  transition: .1s all;
+  transition: 0.1s all;
   outline: 1px solid transparent;
   border: 1px solid #888;
   font-size: 1em;
@@ -131,7 +129,8 @@ textarea {
   height: 100%;
 }
 
-.dropzone, .output {
+.dropzone,
+.output {
   flex: 3;
 }
 
@@ -141,7 +140,7 @@ textarea {
 
 .status {
   flex: 0 0 0;
-  padding: 0 10px;
+  padding: 0 2%;
 }
 
 .status-text {
@@ -218,5 +217,5 @@ footer a {
 }
 
 .btn:disabled:hover {
-  cursor: default
+  cursor: default;
 }
