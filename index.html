@@ -14,14 +14,17 @@
       <p>A rudimentary CSV to JSON converter. Checks for "TRUE", "FALSE", and "null" values.</p>
       <div class="row">
         <div class="column">
+          <div class="dropzone">
           <textarea data-key="csvinput" class="csvinput" placeholder="Paste CSV or choose a file" name="csvinput">
 paste,your,csv,here
 or,upload,a,file
+or,dragndrop,a,file
 </textarea>
+</div>
           <div class="textarea-actions">
             <input data-key="fileinput" name="fileinput" type="file" id="file">
             <label for="file" class="btn">Choose a file</label>
-            <div class="filename">No file selected</div>
+            <div class="file-status-text">No file selected</div>
           </div>
         </div>
         <div class="column status">

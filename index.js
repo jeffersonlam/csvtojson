@@ -5,9 +5,10 @@
                         window.Blob;
   const csvInput = document.querySelector('[data-key=csvinput]');
   const fileInput = document.querySelector('[data-key=fileinput]');
-  const fileName = document.querySelector('.filename');
   const jsonOutput = document.querySelector('.output');
   const copyBtn = document.querySelector('.copy');
+  const dropZone = document.querySelector('.dropzone');
+  let fileStatus = document.querySelector('.file-status-text');
   let jsonStatus = document.querySelector('.status-text');
   let copyStatus = document.querySelector('.copy-status-text');
   let debounce = null;
@@ -24,6 +25,27 @@
   fileInput.addEventListener('onselect', handleFileInput);
   copyBtn.addEventListener('click', handleCopy);
 
+  dropZone.dragEnteredEls = [];
+  dropZone.addEventListener('dragenter', function(e) {
+    this.dragEnteredEls.push(e.target);
+    dropZone.classList.add('active');
+  });
+  dropZone.addEventListener('dragleave', function(e) {
+    this.dragEnteredEls = this.dragEnteredEls.filter(el => {
+      return el != e.target
+    });
+    if (this.dragEnteredEls.length === 0) {
+      dropZone.classList.remove('active');
+    }
+  });
+  dropZone.addEventListener('drop', function(e) {
+    dropZone.classList.remove('active');
+    e.preventDefault();
+    e.stopPropagation();
+    const file = e.dataTransfer.files[0];
+    parseFile(file);
+  });
+
   csvInput.dispatchEvent(new Event('onchange'));
 
   function handleCsvInput() {
@@ -37,7 +59,6 @@
   }
 
   function handleJsonOutput() {
-    console.log(this.value);
     if (this.value.length > 0) copyBtn.disabled = false;
     else copyBtn.disabled = true;
   }
@@ -45,12 +66,16 @@
   function handleFileInput() {
     const file = this.files[0];
     this.value = "";
+    parseFile(file);
+  }
+
+  function parseFile(file) {
     if (file) {
       if (file.name.slice(-3) != 'csv') {
-        fileName.textContent = "Please select a csv file";
+        fileStatus.textContent = "Please select a csv file";
         return;
       }
-      fileName.textContent = file.name;
+      fileStatus.textContent = file.name;
       const fileReader = new FileReader();
 
       fileReader.onload = e => {
@@ -61,13 +86,13 @@
 
       fileReader.onerror = e => {
         console.error('Failed to read file', e);
-        jsonStatus = updateStatus(jsonStatus, "Failed to read file");
+        fileStatus = updateStatus(fileStatus, "Failed to read file");
       };
 
       fileReader.readAsText(file);
     } else {
       console.error('Failed to read file');
-      jsonStatus = updateStatus(jsonStatus, "Failed to read file");
+      fileStatus = updateStatus(fileStatus, "Failed to read file");
     }
   }
 

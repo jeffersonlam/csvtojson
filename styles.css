@@ -78,11 +78,25 @@ input[type='file']:focus + label {
   outline: 5px auto -webkit-focus-ring-color;
 }
 
-.filename {
+.file-status-text {
   margin-top: 10px;
 }
 
+
+.dropzone {
+  height: 100%;
+}
+
+.dropzone.active textarea{
+  outline: 5px dashed hotpink;
+  border: 1px solid transparent;
+  background-color: rgba(254, 107, 180, .1);
+}
+
 textarea {
+  transition: .1s all;
+  outline: none;
+  border: 1px solid #888;
   font-size: 0.85em;
   width: 100%;
   height: 100%;
