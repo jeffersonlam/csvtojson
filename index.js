@@ -126,6 +126,9 @@
           obj[keys[i]] = false;
         } else if (cell.match(/null/i) && cell.toLowerCase() === "null") {
           obj[keys[i]] = null;
+        } else if (cell[0] == "\"" && cell[cell.length-1] == "\"") {
+          const sub = cell.substr(1, cell.length - 2);
+          obj[keys[i]] = sub;
         } else {
           obj[keys[i]] = cell;
         }
