@@ -114,7 +114,8 @@
   function csvToJson(csv) {
     const rows = csv.split(/\n/);
     const keys = rows.shift().split(',');
-    const dataRows = rows.map(row => row.split(','));
+    const regex = new RegExp(/,(?! )/);
+    const dataRows = rows.map(row => row.split(regex));
     const jsonArray = [];
     dataRows.forEach(row => {
       const obj = {};
